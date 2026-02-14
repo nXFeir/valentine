@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"valentine-backend/internal/email"
+	"valentine-backend/pkg/email"
 )
 
 func Handler(w http.ResponseWriter, r *http.Request) {
