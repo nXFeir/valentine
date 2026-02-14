@@ -95,8 +95,10 @@ func Send(ctx context.Context, cfg Config) error {
 		return err
 	}
 
-	wd, _ := os.Getwd()
-	log.Println("Working directory:", wd)
+	files, _ := os.ReadDir("pkg/email")
+	for _, f := range files {
+		log.Println("Found file:", f.Name())
+	}
 
 	message, err := BuildMessage(cfg, time.Now().UTC(), fmt.Sprintf("valentine-%d", time.Now().UnixNano()))
 	if err != nil {
