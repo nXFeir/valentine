@@ -30,8 +30,17 @@ Optional:
 - `EMAIL_SUBJECT` (default: "Valentine Date")
 - `EMAIL_DATE` (default: "March 14, 2026")
 - `EMAIL_GIF_URL`
+- `EMAIL_GIF_PATH` (default: `spongebob-patric.gif`)
+- `EVENT_TITLE` (default: "Valentine Date")
+- `EVENT_DESCRIPTION` (default: "Can't wait to celebrate together.")
+- `EVENT_DATE` (default: `2026-03-14`)
+- `EVENT_ALL_DAY` (default: `true`)
+- `EVENT_TIMEZONE` (default: `Asia/Kuala_Lumpur`)
 - `CORS_ORIGIN` (default: `*`)
 - `ENABLE_OAUTH_FLOW` (set to `true` to enable `/oauth/start` + `/oauth/callback`)
+
+### Embedded GIF note
+Place `spongebob-patric.gif` in `backend/` or set `EMAIL_GIF_PATH` to its relative path inside the deployed bundle.
 
 ### Frontend API base URL
 If your backend is hosted on a different domain, set this before loading `script.js`:
