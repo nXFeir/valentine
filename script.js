@@ -3,6 +3,8 @@ const GIFS = {
   celebrate: "despicable-me-minions.gif",
 };
 
+const API_BASE_URL = window.VALENTINE_API_BASE || "";
+
 const NO_TEXTS = [
   "No",
   "Nope",
@@ -54,6 +56,21 @@ const pickNoText = () => {
 
 const updateNoLabel = () => {
   noButton.textContent = pickNoText();
+};
+
+const sendYesEmail = async () => {
+  const response = await fetch(`${API_BASE_URL}/api/yes`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({}),
+  });
+
+  if (!response.ok) {
+    const message = await response.text();
+    throw new Error(message || "Failed to send email");
+  }
 };
 
 const getViewport = () => ({
@@ -179,10 +196,19 @@ noButton.addEventListener("click", (event) => {
   event.preventDefault();
 });
 
-yesButton.addEventListener("click", () => {
+yesButton.addEventListener("click", async () => {
   mainGif.src = GIFS.celebrate;
   mainGif.alt = "Celebratory reaction";
   confirmMessage.hidden = false;
+  confirmMessage.textContent = "Sending our invitation...";
+
+  try {
+    await sendYesEmail();
+    confirmMessage.textContent = "Yay! The invitation is on its way.";
+    yesButton.disabled = true;
+  } catch (error) {
+    confirmMessage.textContent = "Hmm, I could not send the email. Please try again.";
+  }
 });
 
 window.addEventListener("resize", () => {
@@ -195,4 +221,3 @@ window.addEventListener("load", () => {
   mainGif.src = GIFS.ask;
   placeInitialNoButton();
 });
-
