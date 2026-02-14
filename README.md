@@ -54,8 +54,11 @@ Go run .
 If you point Vercel to the `backend` folder, routes are available at:
 - `https://<your-domain>/api/health`
 - `https://<your-domain>/api/yes`
+- `https://<your-domain>/api/oauth/start`
+- `https://<your-domain>/api/oauth/callback`
 
 The `backend/main.go` file is for local server usage; Vercel uses the functions under `backend/api/`.
+The shared Gmail logic for Vercel functions lives in `backend/pkg/email/`.
 
 ## Customize the GIFs
 Update the GIF URLs or paths in `script.js`:
