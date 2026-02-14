@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Be My Valentine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500;600;700&display=swap"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="card" aria-live="polite">
+    <h1 class="title">Will you be my valentine?</h1>
+    <p class="subtitle">I really hope you say yes.</p>
+    <p class="love-note">Every day with you feels special.</p>
+    <p class="celebration-date">Celebration date: March 14, 2026</p>
+
+    <figure class="gif-wrap">
+      <img
+        id="main-gif"
+        class="gif"
+        src=""
+        alt="Puppy eyes asking for a valentine"
+      />
+    </figure>
+
+    <div class="button-area">
+      <button id="yes-button" class="btn btn-yes" type="button" tabindex="-1">Yes</button>
+      <button id="no-button" class="btn btn-no" type="button" tabindex="-1">No</button>
+    </div>
+
+    <p id="confirm-message" class="confirm" hidden>Yay! You made me the happiest person.</p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

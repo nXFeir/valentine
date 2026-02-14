@@ -1,0 +1,177 @@
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Playfair Display", "Segoe UI", Arial, sans-serif;
+  background: radial-gradient(circle at top, #fff4f7, #ffe1eb 45%, #ffc9da);
+  color: #3a1b25;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: absolute;
+  inset: -20% -10% auto auto;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.6), transparent 65%);
+  filter: blur(2px);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+body::after {
+  inset: auto auto -15% -10%;
+  width: 460px;
+  height: 460px;
+  opacity: 0.5;
+}
+
+.card {
+  width: min(720px, 92vw);
+  min-height: min(680px, 86svh);
+  background: linear-gradient(180deg, #ffffff 0%, #fff7fa 100%);
+  border-radius: 28px;
+  padding: 36px 30px 44px;
+  box-shadow: 0 26px 70px rgba(58, 27, 37, 0.18);
+  text-align: center;
+  position: relative;
+  border: 1px solid rgba(255, 183, 202, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-size: clamp(2.4rem, 6vw, 3.4rem);
+  font-family: "Great Vibes", "Playfair Display", "Segoe UI", Arial, sans-serif;
+  font-weight: 400;
+  color: #c43c62;
+}
+
+.subtitle {
+  margin: 0 0 8px;
+  color: #8a3d52;
+  font-size: 1.05rem;
+}
+
+.love-note {
+  margin: 0 0 22px;
+  color: #a24a63;
+  font-size: 1rem;
+}
+
+.celebration-date {
+  margin: 0 0 20px;
+  color: #b24b6a;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.gif-wrap {
+  margin: 0 auto 24px;
+  width: min(360px, 80vw);
+}
+
+.gif {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  background: #fff0f6;
+  border: 2px solid #ffcadb;
+  display: block;
+  min-height: 220px;
+  object-fit: cover;
+  box-shadow: 0 12px 30px rgba(255, 111, 141, 0.15);
+}
+
+.button-area {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  min-height: 60px;
+  position: relative;
+  z-index: 1;
+  margin-top: 12px;
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 12px 24px rgba(58, 27, 37, 0.16);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-yes {
+  background: linear-gradient(135deg, #ff5f82, #ff7aa2 55%, #ff9fc0);
+  color: #fff;
+  font-size: 1.15rem;
+  padding: 16px 42px;
+  box-shadow: 0 18px 36px rgba(255, 92, 130, 0.4);
+}
+
+.btn-yes:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 22px 44px rgba(255, 92, 130, 0.48);
+}
+
+.btn-no {
+  background: #ffe4ec;
+  color: #4a1f2e;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+}
+
+.confirm {
+  margin-top: 26px;
+  font-size: 1.15rem;
+  color: #ff3f64;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding: 28px 20px 36px;
+    min-height: min(620px, 88svh);
+  }
+
+  .btn {
+    width: 110px;
+    padding: 14px 20px;
+  }
+
+  .btn-yes {
+    width: auto;
+    padding: 16px 36px;
+  }
+}
