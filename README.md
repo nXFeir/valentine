@@ -50,6 +50,13 @@ Go mod download
 Go run .
 ```
 
+### Vercel deployment note
+If you point Vercel to the `backend` folder, routes are available at:
+- `https://<your-domain>/api/health`
+- `https://<your-domain>/api/yes`
+
+The `backend/main.go` file is for local server usage; Vercel uses the functions under `backend/api/`.
+
 ## Customize the GIFs
 Update the GIF URLs or paths in `script.js`:
 
