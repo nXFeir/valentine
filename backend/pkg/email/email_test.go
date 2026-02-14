@@ -29,6 +29,10 @@ func TestBuildMessageIncludesCalendarAndGif(t *testing.T) {
 		t.Fatalf("expected calendar invite")
 	}
 
+	if !strings.Contains(msg, "method=REQUEST") {
+		t.Fatalf("expected calendar method request")
+	}
+
 	if !strings.Contains(msg, "Content-Type: image/gif") {
 		t.Fatalf("expected inline gif")
 	}

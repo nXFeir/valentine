@@ -167,13 +167,16 @@ func BuildMessage(cfg Config, now time.Time, uid string) (string, error) {
 	builder.WriteString("\r\n\r\n")
 
 	builder.WriteString(fmt.Sprintf("--%s--\r\n\r\n", boundaryRelated))
-	builder.WriteString(fmt.Sprintf("--%s--\r\n\r\n", boundaryAlt))
 
-	builder.WriteString(fmt.Sprintf("--%s\r\n", boundaryMixed))
-	builder.WriteString("Content-Type: text/calendar; charset=\"UTF-8\"; method=REQUEST\r\n")
-	builder.WriteString("Content-Disposition: attachment; filename=\"invite.ics\"\r\n\r\n")
+	builder.WriteString(fmt.Sprintf("--%s\r\n", boundaryAlt))
+	builder.WriteString("Content-Type: text/calendar; charset=\"UTF-8\"; method=REQUEST; name=\"invite.ics\"\r\n")
+	builder.WriteString("Content-Transfer-Encoding: 7bit\r\n")
+	builder.WriteString("Content-Disposition: attachment; filename=\"invite.ics\"\r\n")
+	builder.WriteString("Content-Class: urn:content-classes:calendarmessage\r\n\r\n")
 	builder.WriteString(calendarInvite)
 	builder.WriteString("\r\n\r\n")
+
+	builder.WriteString(fmt.Sprintf("--%s--\r\n\r\n", boundaryAlt))
 
 	builder.WriteString(fmt.Sprintf("--%s--\r\n", boundaryMixed))
 	return builder.String(), nil
