@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -93,6 +94,9 @@ func Send(ctx context.Context, cfg Config) error {
 	if err != nil {
 		return err
 	}
+
+	wd, _ := os.Getwd()
+	log.Println("Working directory:", wd)
 
 	message, err := BuildMessage(cfg, time.Now().UTC(), fmt.Sprintf("valentine-%d", time.Now().UnixNano()))
 	if err != nil {
