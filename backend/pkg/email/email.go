@@ -2,11 +2,11 @@ package email
 
 import (
 	"context"
+	_ "embed"
 	"encoding/base64"
 	"errors"
 	"fmt"
 	"os"
-	"path/filepath"
 	"strings"
 	"time"
 
@@ -15,6 +15,9 @@ import (
 	"google.golang.org/api/gmail/v1"
 	"google.golang.org/api/option"
 )
+
+//go:embed spongebob-patric.gif
+var embeddedGif []byte
 
 type Config struct {
 	ClientID         string
@@ -26,7 +29,6 @@ type Config struct {
 	Subject          string
 	Date             string
 	GifURL           string
-	GifPath          string
 	EventTitle       string
 	EventDescription string
 	EventDate        string
@@ -45,7 +47,6 @@ func LoadConfig() (Config, error) {
 		Subject:          envOrDefault("EMAIL_SUBJECT", "Valentine Date"),
 		Date:             envOrDefault("EMAIL_DATE", "March 14, 2026"),
 		GifURL:           envOrDefault("EMAIL_GIF_URL", "https://media.giphy.com/media/3oEjI4sFlp73fvEYgw/giphy.gif"),
-		GifPath:          envOrDefault("EMAIL_GIF_PATH", "spongebob-patric.gif"),
 		EventTitle:       envOrDefault("EVENT_TITLE", "Valentine Date"),
 		EventDescription: envOrDefault("EVENT_DESCRIPTION", "Can't wait to celebrate together."),
 		EventDate:        envOrDefault("EVENT_DATE", "2026-03-14"),
@@ -105,9 +106,9 @@ func Send(ctx context.Context, cfg Config) error {
 }
 
 func BuildMessage(cfg Config, now time.Time, uid string) (string, error) {
-	gifBytes, err := os.ReadFile(cfg.GifPath)
-	if err != nil {
-		return "", fmt.Errorf("read gif: %w", err)
+	gifBytes := embeddedGif
+	if len(gifBytes) == 0 {
+		return "", fmt.Errorf("embedded gif is empty")
 	}
 
 	calendarInvite, err := buildCalendarInvite(cfg, now, uid)
@@ -161,7 +162,7 @@ func BuildMessage(cfg Config, now time.Time, uid string) (string, error) {
 	builder.WriteString("Content-Type: image/gif\r\n")
 	builder.WriteString("Content-Transfer-Encoding: base64\r\n")
 	builder.WriteString(fmt.Sprintf("Content-ID: <%s>\r\n", contentID))
-	builder.WriteString(fmt.Sprintf("Content-Disposition: inline; filename=\"%s\"\r\n\r\n", filepath.Base(cfg.GifPath)))
+	builder.WriteString("Content-Disposition: inline; filename=\"spongebob-patric.gif\"\r\n\r\n")
 	builder.WriteString(chunkBase64(gifBytes))
 	builder.WriteString("\r\n\r\n")
 

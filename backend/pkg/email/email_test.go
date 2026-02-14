@@ -13,7 +13,6 @@ func TestBuildMessageIncludesCalendarAndGif(t *testing.T) {
 		Subject:          "Valentine Date",
 		Date:             "March 14, 2026",
 		GifURL:           "https://example.com/gif",
-		GifPath:          "testdata/inline.gif",
 		EventTitle:       "Valentine Date",
 		EventDescription: "Can't wait",
 		EventDate:        "2026-03-14",
