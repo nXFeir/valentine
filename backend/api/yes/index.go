@@ -3,7 +3,9 @@ package handler
 import (
 	"context"
 	"encoding/json"
+	"log"
 	"net/http"
+	"os"
 
 	"valentine-backend/pkg/email"
 )
@@ -25,7 +27,11 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
 		return
 	}
-
+	files, _ := os.ReadDir("pkg/email")
+	for _, f := range files {
+		log.Println("Found file:", f.Name())
+	}
+	log.Println("Founestset:")
 	writeCORSHeaders(w, cfg.CorsOrigin)
 	if err := email.Send(context.Background(), cfg); err != nil {
 		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})

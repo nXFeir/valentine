@@ -5,7 +5,6 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
-	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -93,11 +92,6 @@ func Send(ctx context.Context, cfg Config) error {
 	gmailSvc, err := gmail.NewService(ctx, option.WithHTTPClient(httpClient))
 	if err != nil {
 		return err
-	}
-
-	files, _ := os.ReadDir("pkg/email")
-	for _, f := range files {
-		log.Println("Found file:", f.Name())
 	}
 
 	message, err := BuildMessage(cfg, time.Now().UTC(), fmt.Sprintf("valentine-%d", time.Now().UnixNano()))
